@@ -3,23 +3,19 @@
 # ------------------------------------------------------
 
 type User {
-  id: String!
+  id: Float!
   name: String!
   role: String!
-  salary: Int!
-  advances: [Int!]!
+  salary: Float!
+  advances: [Float!]!
 }
 
 type Query {
   getUsers: [User!]!
+  getUser(id: Float!): User!
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
-}
-
-input CreateUserInput {
-  name: String!
-  role: String!
-  salary: Float!
+  createUser(name: String!, role: String!, salary: Float!): User!
+  removeUser(id: Float!): Boolean!
 }
