@@ -4,9 +4,9 @@ import { ObjectType, Field, Float } from '@nestjs/graphql';
 @ObjectType()
 @Entity('users')
 export class User {
-  @Field(() => Number)
-  @PrimaryGeneratedColumn()
-  id: number;
+  @Field(() => String)
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Field()
   @Column()

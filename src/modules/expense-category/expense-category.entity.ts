@@ -1,12 +1,12 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 
-@ObjectType() // Decorate the class with @ObjectType()
+@ObjectType()
 @Entity()
 export class ExpenseCategory {
-  @Field(() => Int)  // Use @Field() decorator for each field
-  @PrimaryGeneratedColumn()
-  id: number;
+  @Field(() => String)
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Field()
   @Column()

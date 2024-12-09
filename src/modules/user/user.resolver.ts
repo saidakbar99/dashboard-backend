@@ -12,7 +12,7 @@ export class UserResolver {
   }
 
   @Query(() => User)
-  getUser(@Args('id') id: number): Promise<User> {
+  getUser(@Args('id') id: string): Promise<User> {
     return this.userService.findOne(id);
   }
 
@@ -26,7 +26,7 @@ export class UserResolver {
   }
 
   @Mutation(() => Boolean)
-  removeUser(@Args('id') id: number): Promise<boolean> {
+  removeUser(@Args('id') id: string): Promise<boolean> {
     return this.userService.remove(id).then(() => true);
   }
 }

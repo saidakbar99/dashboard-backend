@@ -1,12 +1,12 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { ObjectType, Field, Float, Int } from '@nestjs/graphql';
 
-@ObjectType() // Make sure the class is decorated with @ObjectType()
+@ObjectType()
 @Entity()
 export class Worker {
-  @Field(() => Int)  // Fields should have @Field() decorator
-  @PrimaryGeneratedColumn()
-  id: number;
+  @Field(() => String)
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Field()
   @Column()
@@ -16,7 +16,7 @@ export class Worker {
   @Column({ nullable: true })
   role: string;
 
-  @Field(() => Float)  // If the field is a number type, use Float or Int accordingly
+  @Field(() => Float)
   @Column('decimal', { precision: 15, scale: 2, default: 0 })
   salary: number;
 

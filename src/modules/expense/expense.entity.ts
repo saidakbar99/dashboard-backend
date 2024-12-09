@@ -7,9 +7,9 @@ import { Project } from '../project/project.entity';
 @ObjectType()
 @Entity()
 export class Expense {
-  @PrimaryGeneratedColumn()
-  @Field(() => Int)
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  @Field(() => String)
+  id: string;
 
   @Column('decimal', { precision: 15, scale: 2 })
   @Field(() => Float)

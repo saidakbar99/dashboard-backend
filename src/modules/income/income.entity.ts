@@ -5,9 +5,9 @@ import { Project } from '../project/project.entity';
 @ObjectType()
 @Entity()
 export class Income {
-  @Field(() => Int)
-  @PrimaryGeneratedColumn()
-  id: number;
+  @Field(() => String)
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Field(() => Float)
   @Column('decimal', { precision: 15, scale: 2 })

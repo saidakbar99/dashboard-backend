@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 
 type User {
-  id: Float!
+  id: String!
   name: String!
   role: String!
   salary: Float!
@@ -11,7 +11,7 @@ type User {
 }
 
 type Project {
-  id: Int!
+  id: String!
   name: String!
   description: String!
   income_amount: Float!
@@ -25,7 +25,7 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type ExpenseCategory {
-  id: Int!
+  id: String!
   name: String!
   description: String
   created_at: DateTime!
@@ -33,7 +33,7 @@ type ExpenseCategory {
 }
 
 type Worker {
-  id: Int!
+  id: String!
   name: String!
   role: String!
   salary: Float!
@@ -42,7 +42,7 @@ type Worker {
 }
 
 type Expense {
-  id: Int!
+  id: String!
   amount: Float!
   description: String!
   category: ExpenseCategory!
@@ -53,7 +53,7 @@ type Expense {
 }
 
 type Income {
-  id: Int!
+  id: String!
   amount: Float!
   source: String!
   project: Project!
@@ -63,7 +63,7 @@ type Income {
 
 type Query {
   getUsers: [User!]!
-  getUser(id: Float!): User!
+  getUser(id: String!): User!
   getProjects: [Project!]!
   getIncomes: [Income!]!
   getWorkers: [Worker!]!
@@ -72,7 +72,7 @@ type Query {
 
 type Mutation {
   createUser(name: String!, role: String!, salary: Float!): User!
-  removeUser(id: Float!): Boolean!
+  removeUser(id: String!): Boolean!
   createProject(name: String!, description: String!, income_amount: Float!): Project!
   createExpense(amount: Float!, description: String!, category: ExpenseCategoryInput!, worker: WorkerInput!, project: ProjectInput!, expense_type: String!): Expense!
   createIncome(amount: Float!, source: String!, project_id: Float!): Income!

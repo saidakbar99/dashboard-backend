@@ -1,7 +1,7 @@
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
 import { ExpenseService } from './expense.service';
 import { Expense } from './expense.entity';
-import { ExpenseCategoryInput } from '../expense-category/expense-category.input';  // Import the InputType
+import { ExpenseCategoryInput } from '../expense-category/expense-category.input';
 import { WorkerInput } from '../worker/worker.input';
 import { ProjectInput } from '../project/project.input';
 
@@ -13,7 +13,7 @@ export class ExpenseResolver {
   async createExpense(
     @Args('amount') amount: number,
     @Args('description') description: string,
-    @Args('category') category: ExpenseCategoryInput,  // Use ExpenseCategoryInput here
+    @Args('category') category: ExpenseCategoryInput,
     @Args('worker') worker: WorkerInput,  
     @Args('project') project: ProjectInput,  
     @Args('expense_type') expense_type: 'general' | 'worker_salary' | 'worker_advance' | 'planned',
