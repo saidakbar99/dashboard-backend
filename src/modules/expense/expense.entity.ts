@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
+import { ObjectType, Field, Float, GraphQLISODateTime } from '@nestjs/graphql';
 import { ExpenseCategory } from '../expense-category/expense-category.entity';
 import { Worker } from '../worker/worker.entity';
 import { Project } from '../project/project.entity';
@@ -44,4 +44,8 @@ export class Expense {
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   @Field()
   created_at: Date;
+
+  @Column({ type: 'date', nullable: false })
+  @Field(() => GraphQLISODateTime, { nullable: false })
+  expense_date: Date;
 }

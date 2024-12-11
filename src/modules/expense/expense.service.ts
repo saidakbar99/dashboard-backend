@@ -11,7 +11,9 @@ export class ExpenseService {
   ) {}
 
   async findAll(): Promise<Expense[]> {
-    return this.expenseRepository.find();
+    return this.expenseRepository.find({
+      relations: ['category', 'worker', 'project'],
+    });
   }
 
   async create(expenseData: Partial<Expense>): Promise<Expense> {
