@@ -20,4 +20,9 @@ export class ExpenseService {
     const expense = this.expenseRepository.create(expenseData);
     return this.expenseRepository.save(expense);
   }
+
+  async update(id: string, updateData: Partial<Expense>): Promise<Expense> {
+    await this.expenseRepository.update(id, updateData);
+    return this.expenseRepository.findOne({ where: { id }, relations: ['category', 'worker', 'project'] });
+  }
 }

@@ -76,6 +76,7 @@ type Mutation {
   removeUser(id: String!): Boolean!
   createProject(name: String!, description: String!, income_amount: Float!): Project!
   createExpense(amount: Float!, category: String!, expense_date: DateTime!, description: String, worker: String, project: String): Expense!
+  updateExpense(id: String!, amount: Float, description: String, category: String, worker: String, project: String, expense_date: DateTime): Expense!
   createIncome(amount: Float!, source: String!, project_id: Float!): Income!
   createWorker(name: String!, role: String!, salary: Float!): Worker!
   createExpenseCategory(name: String!, description: String!): ExpenseCategory!
