@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Args, Query, GraphQLISODateTime } from '@nestjs/graphql';
+import { Resolver, Mutation, Args, Query, GraphQLISODateTime, Float } from '@nestjs/graphql';
 import { formatISO } from 'date-fns';
 import { ExpenseService } from './expense.service';
 import { Expense } from './expense.entity';
@@ -21,13 +21,12 @@ export class ExpenseResolver {
 
   @Mutation(() => Expense)
   async createExpense(
-    @Args('amount') amount: number,
-    @Args('description') description: string,
-    @Args('category') category: ExpenseCategoryInput,
-    @Args('worker') worker: WorkerInput,  
-    @Args('project') project: ProjectInput,  
-    @Args('expense_type') expense_type: 'general' | 'worker_salary' | 'worker_advance' | 'planned',
-    @Args('expense_date') expense_date: Date,
+    @Args('amount', { type: () => Float }) amount: number,
+    @Args('category', { type: () => String }) category: string,
+    @Args('expense_date', { type: () => Date }) expense_date: Date,
+    @Args('description', { type: () => String, nullable: true }) description?: string,
+    @Args('worker', { type: () => String, nullable: true }) worker?: string,
+    @Args('project', { type: () => String, nullable: true }) project?: string
   ): Promise<Expense> {
     return this.expenseService.create({
       amount,
@@ -38,7 +37,6 @@ export class ExpenseResolver {
       worker,
       //@ts-ignore
       project,
-      expense_type,
       expense_date,
     });
   }

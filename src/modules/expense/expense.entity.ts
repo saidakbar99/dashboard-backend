@@ -34,13 +34,6 @@ export class Expense {
   @Field(() => Project)
   project: Project;
 
-  @Column({
-    type: 'enum',
-    enum: ['general', 'worker_salary', 'worker_advance', 'planned'],
-  })
-  @Field()
-  expense_type: 'general' | 'worker_salary' | 'worker_advance' | 'planned';
-
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   @Field()
   created_at: Date;

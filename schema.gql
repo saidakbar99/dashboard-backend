@@ -48,7 +48,6 @@ type Expense {
   category: ExpenseCategory!
   worker: Worker!
   project: Project!
-  expense_type: String!
   created_at: DateTime!
   expense_date: DateTime!
 }
@@ -76,20 +75,8 @@ type Mutation {
   createUser(name: String!, role: String!, salary: Float!): User!
   removeUser(id: String!): Boolean!
   createProject(name: String!, description: String!, income_amount: Float!): Project!
-  createExpense(amount: Float!, description: String!, category: ExpenseCategoryInput!, worker: WorkerInput!, project: ProjectInput!, expense_type: String!, expense_date: DateTime!): Expense!
+  createExpense(amount: Float!, category: String!, expense_date: DateTime!, description: String, worker: String, project: String): Expense!
   createIncome(amount: Float!, source: String!, project_id: Float!): Income!
   createWorker(name: String!, role: String!, salary: Float!): Worker!
   createExpenseCategory(name: String!, description: String!): ExpenseCategory!
-}
-
-input ExpenseCategoryInput {
-  id: String!
-}
-
-input WorkerInput {
-  id: String!
-}
-
-input ProjectInput {
-  id: String!
 }
