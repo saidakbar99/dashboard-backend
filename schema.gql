@@ -55,10 +55,10 @@ type Expense {
 type Income {
   id: String!
   amount: Float!
-  source: String!
+  description: String!
   project: Project!
+  income_date: DateTime!
   created_at: DateTime!
-  updated_at: DateTime!
 }
 
 type Query {
@@ -77,7 +77,7 @@ type Mutation {
   createProject(name: String!, description: String!, income_amount: Float!): Project!
   createExpense(amount: Float!, category: String!, expense_date: DateTime!, description: String, worker: String, project: String): Expense!
   updateExpense(id: String!, amount: Float, description: String, category: String, worker: String, project: String, expense_date: DateTime): Expense!
-  createIncome(amount: Float!, source: String!, project_id: Float!): Income!
+  createIncome(amount: Float!, description: String!, project_id: String!, income_date: DateTime!): Income!
   createWorker(name: String!, role: String!, salary: Float!): Worker!
   createExpenseCategory(name: String!, description: String!): ExpenseCategory!
 }

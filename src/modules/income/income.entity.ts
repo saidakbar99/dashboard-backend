@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { ObjectType, Field, Float, Int } from '@nestjs/graphql';
+import { ObjectType, Field, Float, Int, GraphQLISODateTime } from '@nestjs/graphql';
 import { Project } from '../project/project.entity';
 
 @ObjectType()
@@ -15,18 +15,18 @@ export class Income {
 
   @Field()
   @Column()
-  source: string;
+  description: string;
 
   @Field(() => Project)
-  @ManyToOne(() => Project)
+  @ManyToOne(() => Project, (project) => project.income_amount, { eager: true, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'project_id' })
   project: Project;
+
+  @Field(() => GraphQLISODateTime)
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  income_date: Date; 
 
   @Field()
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
-
-  @Field()
-  @Column({ default: () => 'CURRENT_TIMESTAMP' })
-  updated_at: Date;
 }

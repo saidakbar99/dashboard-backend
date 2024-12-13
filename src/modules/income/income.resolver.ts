@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, GraphQLISODateTime } from '@nestjs/graphql';
 import { IncomeService } from './income.service';
 import { Income } from './income.entity';
 
@@ -14,9 +14,10 @@ export class IncomeResolver {
   @Mutation(() => Income)
   async createIncome(
     @Args('amount') amount: number,
-    @Args('source') source: string,
-    @Args('project_id') project_id: number,
+    @Args('description') description: string,
+    @Args('project_id') project_id: string,
+    @Args('income_date', { type: () => GraphQLISODateTime }) income_date: Date,
   ): Promise<Income> {
-    return this.incomeService.create({ amount, source, project: { id: project_id } as any });
+    return this.incomeService.create({ amount, description, income_date, project: { id: project_id } as any });
   }
 }
