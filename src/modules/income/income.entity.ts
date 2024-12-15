@@ -15,7 +15,7 @@ export class Income {
 
   @Field()
   @Column()
-  description: string;
+  description?: string;
 
   @Field(() => Project)
   @ManyToOne(() => Project, (project) => project.income_amount, { eager: true, onDelete: 'CASCADE' })

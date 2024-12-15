@@ -16,15 +16,10 @@ export class Project {
   @Field()
   description: string;
 
-  @Column('decimal', { precision: 15, scale: 2, default: 0 })
-  @Field(() => Float)
-  income_amount: number;
+  @Field(() => Float, { nullable: true })
+  income_amount?: number;
 
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   @Field()
   created_at: Date;
-
-  @Column({ default: () => 'CURRENT_TIMESTAMP' })
-  @Field()
-  updated_at: Date;
 }

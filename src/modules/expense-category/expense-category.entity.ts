@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
 
 @ObjectType()
 @Entity()
@@ -16,11 +16,10 @@ export class ExpenseCategory {
   @Column({ nullable: true })
   description: string;
 
-  @Field()
-  @Column({ default: () => 'CURRENT_TIMESTAMP' })
-  created_at: Date;
+  @Field(() => Float, { nullable: true })
+  expense_amount?: number;
 
   @Field()
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
-  updated_at: Date;
+  created_at: Date;
 }

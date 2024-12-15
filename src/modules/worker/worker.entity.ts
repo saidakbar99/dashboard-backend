@@ -23,8 +23,4 @@ export class Worker {
   @Field()
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
-
-  @Field()
-  @Column({ default: () => 'CURRENT_TIMESTAMP' })
-  updated_at: Date;
 }

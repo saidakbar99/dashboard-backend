@@ -14,10 +14,11 @@ export class IncomeResolver {
   @Mutation(() => Income)
   async createIncome(
     @Args('amount') amount: number,
-    @Args('description') description: string,
-    @Args('project_id') project_id: string,
     @Args('income_date', { type: () => GraphQLISODateTime }) income_date: Date,
+    @Args('description', { type: () => String, nullable: true }) description?: string,
+    @Args('project', { type: () => String}) project?: string
   ): Promise<Income> {
-    return this.incomeService.create({ amount, description, income_date, project: { id: project_id } as any });
+    //@ts-ignore
+    return this.incomeService.create({ amount, description, income_date, project });
   }
 }

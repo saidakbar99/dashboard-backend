@@ -18,14 +18,6 @@ export class IncomeService {
   }
 
   async create(incomeData: Partial<Income>): Promise<Income> {
-    if (incomeData.project?.id) {
-      const project = await this.projectRepository.findOneBy({ id: incomeData.project.id });
-      if (!project) {
-        throw new Error(`Project with ID ${incomeData.project.id} not found`);
-      }
-      incomeData.project = project;
-    }
-
     const income = this.incomeRepository.create(incomeData);
     return this.incomeRepository.save(income);
   }

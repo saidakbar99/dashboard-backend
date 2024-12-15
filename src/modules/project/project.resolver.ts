@@ -15,8 +15,7 @@ export class ProjectResolver {
   async createProject(
     @Args('name') name: string,
     @Args('description') description: string,
-    @Args('income_amount') income_amount: number,
   ): Promise<Project> {
-    return this.projectService.create({ name, description, income_amount });
+    return this.projectService.create({ name, description });
   }
 }
