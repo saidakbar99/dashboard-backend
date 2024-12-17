@@ -18,4 +18,9 @@ export class ProjectResolver {
   ): Promise<Project> {
     return this.projectService.create({ name, description });
   }
+
+  @Mutation(() => Boolean)
+  async deleteProject(@Args('id') id: string): Promise<boolean> {
+    return this.projectService.delete(id);
+  }
 }

@@ -63,4 +63,9 @@ export class ExpenseResolver {
       expense_date,
     });
   }
+
+  @Mutation(() => Boolean)
+  async deleteExpense(@Args('id') id: string): Promise<boolean> {
+    return this.expenseService.delete(id);
+  }  
 }

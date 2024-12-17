@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ExpenseCategory } from './expense-category.entity';
@@ -33,5 +33,13 @@ export class ExpenseCategoryService {
   async create(categoryData: Partial<ExpenseCategory>): Promise<ExpenseCategory> {
     const category = this.expenseCategoryRepository.create(categoryData);
     return this.expenseCategoryRepository.save(category);
+  }
+
+  async delete(id: string): Promise<boolean> {
+    const result = await this.expenseCategoryRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Expense Category with ID "${id}" not found.`);
+    }
+    return true;
   }
 }

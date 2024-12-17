@@ -21,4 +21,9 @@ export class IncomeResolver {
     //@ts-ignore
     return this.incomeService.create({ amount, description, income_date, project });
   }
+
+  @Mutation(() => Boolean)
+  async deleteIncome(@Args('id') id: string): Promise<boolean> {
+    return this.incomeService.delete(id);
+  }
 }

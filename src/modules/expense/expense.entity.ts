@@ -19,20 +19,20 @@ export class Expense {
   @Field()
   description: string;
 
-  @ManyToOne(() => ExpenseCategory)
+  @ManyToOne(() => ExpenseCategory, { onDelete: 'RESTRICT' })
   @JoinColumn({ name: 'category_id' })
   @Field(() => ExpenseCategory)
   category: ExpenseCategory;
 
-  @ManyToOne(() => Worker)
+  @ManyToOne(() => Worker, { nullable: true, onDelete: 'SET NULL' })
   @JoinColumn({ name: 'worker_id' })
-  @Field(() => Worker)
-  worker: Worker;
+  @Field(() => Worker, { nullable: true })
+  worker: Worker | null;
 
-  @ManyToOne(() => Project)
+  @ManyToOne(() => Project, { nullable: true, onDelete: 'SET NULL' })
   @JoinColumn({ name: 'project_id' })
-  @Field(() => Project)
-  project: Project;
+  @Field(() => Project, { nullable: true })
+  project: Project | null;
 
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   @Field()

@@ -18,4 +18,9 @@ export class ExpenseCategoryResolver {
   ): Promise<ExpenseCategory> {
     return this.expenseCategoryService.create({ name, description });
   }
+
+  @Mutation(() => Boolean)
+  async deleteExpenseCategory(@Args('id') id: string): Promise<boolean> {
+    return this.expenseCategoryService.delete(id);
+  }
 }

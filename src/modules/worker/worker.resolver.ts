@@ -19,4 +19,9 @@ export class WorkerResolver {
   ): Promise<Worker> {
     return this.workerService.create({ name, role, salary });
   }
+
+  @Mutation(() => Boolean)
+  async deleteWorker(@Args('id') id: string): Promise<boolean> {
+    return this.workerService.delete(id);
+  }
 }

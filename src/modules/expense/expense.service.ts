@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Expense } from './expense.entity';
@@ -24,5 +24,13 @@ export class ExpenseService {
   async update(id: string, updateData: Partial<Expense>): Promise<Expense> {
     await this.expenseRepository.update(id, updateData);
     return this.expenseRepository.findOne({ where: { id }, relations: ['category', 'worker', 'project'] });
+  }
+
+  async delete(id: string): Promise<boolean> {
+    const result = await this.expenseRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Expense with ID "${id}" not found.`);
+    }
+    return true;
   }
 }

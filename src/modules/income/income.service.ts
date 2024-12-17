@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Income } from './income.entity';
@@ -20,5 +20,13 @@ export class IncomeService {
   async create(incomeData: Partial<Income>): Promise<Income> {
     const income = this.incomeRepository.create(incomeData);
     return this.incomeRepository.save(income);
+  }
+
+  async delete(id: string): Promise<boolean> {
+    const result = await this.incomeRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Income with ID "${id}" not found.`);
+    }
+    return true;
   }
 }

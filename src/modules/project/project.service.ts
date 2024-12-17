@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Project } from './project.entity';
@@ -33,5 +33,13 @@ export class ProjectService {
   async create(projectData: Partial<Project>): Promise<Project> {
     const project = this.projectRepository.create(projectData);
     return this.projectRepository.save(project);
+  }
+
+  async delete(id: string): Promise<boolean> {
+    const result = await this.projectRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Project with ID "${id}" not found.`);
+    }
+    return true;
   }
 }
