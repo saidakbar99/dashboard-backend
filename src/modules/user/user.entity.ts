@@ -9,18 +9,14 @@ export class User {
   id: string;
 
   @Field()
-  @Column()
-  name: string;
+  @Column({ unique: true })
+  username: string;
 
   @Field()
   @Column()
-  role: string;
+  password: string;
 
-  @Field(() => Float)
-  @Column('decimal')
-  salary: number;
-
-  @Field(() => [Float], { nullable: true })
-  @Column('decimal', { array: true, nullable: true })
-  advances: number[];
+  @Column({ default: () => 'CURRENT_TIMESTAMP' })
+  @Field()
+  created_at: Date;
 }

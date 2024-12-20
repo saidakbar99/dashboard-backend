@@ -4,10 +4,18 @@
 
 type User {
   id: String!
-  name: String!
-  role: String!
-  salary: Float!
-  advances: [Float!]
+  username: String!
+  password: String!
+  created_at: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type AuthResponse {
+  access_token: String!
 }
 
 type Project {
@@ -17,11 +25,6 @@ type Project {
   income_amount: Float
   created_at: DateTime!
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type Income {
   id: String!
@@ -61,7 +64,7 @@ type Expense {
 
 type Query {
   getUsers: [User!]!
-  getUser(id: String!): User!
+  getUser(username: String!): User!
   getProjects: [Project!]!
   getExpenses: [Expense!]!
   getIncomes: [Income!]!
@@ -70,8 +73,8 @@ type Query {
 }
 
 type Mutation {
-  createUser(name: String!, role: String!, salary: Float!): User!
-  removeUser(id: String!): Boolean!
+  createUser(createUserInput: CreateUserInput!): User!
+  login(loginInput: LoginInput!): AuthResponse!
   createProject(name: String!, description: String!): Project!
   deleteProject(id: String!): Boolean!
   createExpense(amount: Float!, category: String!, expense_date: DateTime!, description: String, worker: String, project: String): Expense!
@@ -83,4 +86,14 @@ type Mutation {
   deleteWorker(id: String!): Boolean!
   createExpenseCategory(name: String!, description: String!): ExpenseCategory!
   deleteExpenseCategory(id: String!): Boolean!
+}
+
+input CreateUserInput {
+  username: String!
+  password: String!
+}
+
+input LoginInput {
+  username: String!
+  password: String!
 }
