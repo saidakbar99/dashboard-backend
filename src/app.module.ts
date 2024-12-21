@@ -41,7 +41,7 @@ import * as passport from 'passport';
     IncomeModule,
     WorkerModule,
     ExpenseCategoryModule,
-    AuthModule,
+    // AuthModule,
   ],
 })
 export class AppModule {}

@@ -12,8 +12,8 @@ export class UserService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
 
-    @Inject(forwardRef(() => AuthService))
-    private readonly authService: AuthService,
+    // @Inject(forwardRef(() => AuthService))
+    // private readonly authService: AuthService,
   ) {}
 
   findAll(): Promise<User[]> {
