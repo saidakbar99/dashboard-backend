@@ -58,6 +58,10 @@ type Expense {
   expense_date: DateTime!
 }
 
+type AuthResponse {
+  access_token: String!
+}
+
 type Query {
   getUsers: [User!]!
   getUser(username: String!): User!
@@ -81,9 +85,15 @@ type Mutation {
   deleteWorker(id: String!): Boolean!
   createExpenseCategory(name: String!, description: String!): ExpenseCategory!
   deleteExpenseCategory(id: String!): Boolean!
+  login(loginInput: LoginInput!): AuthResponse!
 }
 
 input CreateUserInput {
+  username: String!
+  password: String!
+}
+
+input LoginInput {
   username: String!
   password: String!
 }

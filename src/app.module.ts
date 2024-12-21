@@ -10,7 +10,6 @@ import { WorkerModule } from './modules/worker/worker.module';
 import { ExpenseCategoryModule } from './modules/expense-category/expense-category.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import * as passport from 'passport';
 
 @Module({
   imports: [
@@ -34,6 +33,7 @@ import * as passport from 'passport';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'schema.gql',
+      context: ({ req }) => ({ req }),
     }),
     UserModule,
     ProjectModule,
@@ -41,7 +41,7 @@ import * as passport from 'passport';
     IncomeModule,
     WorkerModule,
     ExpenseCategoryModule,
-    // AuthModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
