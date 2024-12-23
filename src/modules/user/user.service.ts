@@ -4,16 +4,12 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { User } from './user.entity';
 import { CreateUserInput } from './dto/create-user.input';
-import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-
-    // @Inject(forwardRef(() => AuthService))
-    // private readonly authService: AuthService,
   ) {}
 
   findAll(): Promise<User[]> {
@@ -34,6 +30,7 @@ export class UserService {
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = this.userRepository.create({ username, password: hashedPassword });
+    console.log('>>>useruseruseruser', user)
 
     return this.userRepository.save(user);
   }
